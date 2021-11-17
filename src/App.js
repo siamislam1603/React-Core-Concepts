@@ -1,19 +1,20 @@
 import './App.css';
 
 function App() {
+  const personNames=['Harry Peterson','Tom Holland','Mitchel Marsh','Peter Parker','Dani Alves'];
   return (
     <div className="App">
       <header className="App-header">
-        <Person></Person>
-        <Person></Person>
-        <Person></Person>
-        <Person></Person>
-        <Person></Person>
+        <Person name={personNames[0]}></Person>
+        <Person name={personNames[1]}></Person>
+        <Person name={personNames[2]}></Person>
+        <Person name={personNames[3]}></Person>
+        <Person name={personNames[4]}></Person>
       </header>
     </div>
   );
 }
-function Person(){
+function Person(props){
   const personStyle={
     border:'3px solid tomato',
     padding:'5px',
@@ -22,7 +23,7 @@ function Person(){
   }
   return(
     <div style={personStyle}>
-      <h1>Harry Peterson</h1>
+      <h1>{props.name}</h1>
       <p style={{color:'skyblue'}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam minima quo molestias reiciendis cum nulla dignissimos. Recusandae vero, ipsum sed quae corporis harum quaerat impedit sunt in, animi doloremque perferendis?</p>
     </div>
   );
