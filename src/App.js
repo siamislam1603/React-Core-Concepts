@@ -1,14 +1,11 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect } from 'react';
 import './App.css';
 
 function App() {
-  const personNames=['Harry Peterson','Tom Holland','Mitchel Marsh','Peter Parker','Dani Alves'];
   return (
     <div className="App">
       <header className="App-header">
-        {
-          personNames.map(person=><Person name={person}></Person>)
-        }
+        <Person></Person>
         <Counter></Counter>
       </header>
     </div>
@@ -24,18 +21,28 @@ function Counter(){
     </div>
   );
 }
-function Person(props){
+function Person(){
   const personStyle={
     border:'3px solid tomato',
     padding:'5px',
     margin:'20px',
     borderRadius:'10px'
   }
+  const [persons, setPersons] = useState([]);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res=>res.json())
+    .then(data=>setPersons(data));
+  }, []) //We need to pass an empty array as the 2nd param, otherwise it'll load the data infinitely as dom render the elements multiple times and useEffect also calls itself multiple times. So, for this 2nd empty array, data will be load once.
   return(
-    <div style={personStyle}>
-      <h1>{props.name}</h1>
-      <p style={{color:'skyblue'}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam minima quo molestias reiciendis cum nulla dignissimos. Recusandae vero, ipsum sed quae corporis harum quaerat impedit sunt in, animi doloremque perferendis?</p>
-    </div>
+    persons.map(person=>{
+      return(
+        <div style={personStyle}>
+          <h1>{person.name}</h1>
+          <p style={{color:'skyblue'}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam minima quo molestias reiciendis cum nulla dignissimos. Recusandae vero, ipsum sed quae corporis harum quaerat impedit sunt in, animi doloremque perferendis?</p>
+        </div>
+      );
+    })
   );
 }
 export default App;
