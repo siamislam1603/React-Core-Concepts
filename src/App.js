@@ -1,3 +1,4 @@
+import React,{useState} from 'react';
 import './App.css';
 
 function App() {
@@ -8,7 +9,18 @@ function App() {
         {
           personNames.map(person=><Person name={person}></Person>)
         }
+        <Counter></Counter>
       </header>
+    </div>
+  );
+}
+function Counter(){
+  const [count, setCount] = useState(0);
+  return(
+    <div>
+      <h1>Count:{count}</h1>
+      <button onClick={()=>setCount(count+1)}>Increase Count</button>
+      <button onMouseOver={()=>setCount(count-1)}>Decrease Count</button>
     </div>
   );
 }
