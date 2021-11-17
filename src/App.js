@@ -5,11 +5,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Person name={personNames[0]}></Person>
-        <Person name={personNames[1]}></Person>
-        <Person name={personNames[2]}></Person>
-        <Person name={personNames[3]}></Person>
-        <Person name={personNames[4]}></Person>
+        {
+          personNames.map(person=><Person name={person}></Person>)
+        }
       </header>
     </div>
   );
